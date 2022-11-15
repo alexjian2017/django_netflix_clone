@@ -8,10 +8,22 @@
     <title>Netflix - {% block title %}{% endblock title %}</title>
     <link rel="stylesheet" href={% static "style.css" %}>
 
-    {% block others %}{% endblock others %}
+    {% block others %}
+    {% endblock others %}
 </head>
-<body class="bg-black text-gray-100">
+<body class="bg-black text-gray-100 font-primary">
     {% include 'partial/navbar.html' %}
-    {% block content %}{% endblock content %}
+    {% block content %}
+    {% endblock content %}
+    <script>
+        const nav = document.querySelector('nav')
+        document.addEventListener('scroll',e=>{
+            if (scrollY>100){
+                nav.classList.add('bg-gray-900')
+            }else{
+                nav.classList.remove('bg-gray-900')
+            }
+        })
+    </script>
 </body>
 </html>

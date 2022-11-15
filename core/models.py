@@ -4,7 +4,7 @@ import uuid
 
 AGE_CHOICES = (
     ('ALL','ALL'),
-    ('Kids','Kids')
+    ('Kids','Kids'),
 )
 
 MOVIE_CHOICES= (
