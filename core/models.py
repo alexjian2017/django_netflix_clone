@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 import uuid
 
 AGE_CHOICES = (
-    ('ALL','ALL'),
+    ('All','All'),
     ('Kids','Kids'),
 )
 

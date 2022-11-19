@@ -3,21 +3,13 @@
 Movie
 {% endblock title%}
 
-{% block others %}
-    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
-    <style>
-        .player::-webkit-progress-bar{
-            color: red;
-        }
-    </style>
-{% endblock others %}
 
 {% block content %}
 
     <main class='bg-primary_black h-full w-full '>
-        {{movie |json.script:'movie_data'}}
+        {{ movie|json_script:"movie_data" }}
         
-        <video src="assets/test.mp4" controls class="w-full h-screen player"></video>
+        <video controls class="w-full h-screen player"></video>
         
     </main>
     <script>
@@ -25,8 +17,8 @@ Movie
         const movie_data =JSON.parse(document.getElementById('movie_data').textContent);
 
         const url = new URL(location.href)
-        const video_param =parseInt(url.searchParams.get('epi')) ? parseInt(url.searchParams.get('epi')): 0
-        videoEl.setAttribute('src','http://127.0.0.1:8000/media/${movie_data[videos_param].file}')
+        const video_param =parseInt(url.searchParams.get("epi")) ? parseInt(url.searchParams.get("epi")): 0
+        videoEl.setAttribute('src',`http://127.0.0.1:8000/media/${movie_data[videos_param].file}`)
     </script>
 
 {% endblock content %}

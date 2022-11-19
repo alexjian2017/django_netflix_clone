@@ -41,17 +41,21 @@ class Watch(View):
     def get(self, request, profile_id, *args, **kwargs):
         try:
             profile = Profile.objects.get(uuid = profile_id)
-            movies = Movie.objects.filter(age_limit= profile.age_limit)
-            #content = {'movies':movies}
+            if profile.age_limit == 'Kids':
+                movies = Movie.objects.filter(age_limit= profile.age_limit)
+            else:
+                movies = Movie.objects.all
+            content = {'movies':movies}
             if profile not in request.user.profiles.all():
                 return redirect('core:profile_list')
-            return render(request, 'movieList.html',{'movies':movies})
+            return render(request, 'movieList.html',content)
         except Profile.DoesNotExist:
             return redirect('core:profile_list')
 
 @method_decorator(login_required, name = 'dispatch')
 class ShowMovieDetail(View):
     def get(self, request, movie_id, *args, **kwargs):
+        print(movie_id)
         try:
             movie = Movie.objects.get(uuid=movie_id)
             content ={'movie':movie}
@@ -61,14 +65,12 @@ class ShowMovieDetail(View):
 
 @method_decorator(login_required, name = 'dispatch')
 class ShowMovie(View):
-    def get(request, movie_id, *args, **kwargs):
-        print('hihi')
-        print(request, movie_id, *args, **kwargs)
+    def get(self, request, movie_id, *args, **kwargs):
         try:
             movie = Movie.objects.get(uuid=movie_id)
             movie = movie.videos.values()
             content={'movie':list(movie)}
-            return render(request, 'showMovie.html',content)
+            return render(request, 'showMovie.html', content)
         except Movie.DoesNotExist:
             return redirect('core:profile_list')
 

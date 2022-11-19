@@ -4,7 +4,7 @@ from .views import Home,Test,ProfileList,ProfileCreate,Watch,ShowMovieDetail,Sho
 
 app_name = 'core'
 urlpatterns = [
-    path('', Home.as_view()),
+    path('', Home.as_view(), name='home'),
     path('test', Test),
     path('profile/', ProfileList.as_view(), name='profile_list'),
     path('profile/create', ProfileCreate.as_view(), name='profile_create'),
